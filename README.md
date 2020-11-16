@@ -32,7 +32,7 @@
 | category_id      | integer    | null: false                     |
 | item_status_id   | integer    | null: false                     |
 | delivery_fee_id  | integer    | null: false                     |
-| shipping_from_id | integer    | null: false                     |
+| prefecture_id    | integer    | null: false                     |
 | required_days_id | integer    | null: false                     |
 | user             | references | null: false,  foreign_key: true   |
 
@@ -73,3 +73,4 @@
 ### Association
 
 - belongs_to :order
+
