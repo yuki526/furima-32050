@@ -8,8 +8,7 @@ class User < ApplicationRecord
   has_many :orders
 
   with_options presence: true do
-    validates :email, uniqueness: true
-    validates :password, format: { with: /\A(?=.*?[a-z])[a-z\d]+\z/, message: 'Include both letters and numbers' }
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/, message: 'Include both letters and numbers' }
     validates :nickname
     validates :birth_date
     validates :last_name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: 'Full-width characters' }
