@@ -31,6 +31,13 @@ before_action :authenticate_user!, only: [:new, :create, :destroy]
     redirect_to root_path
   end
 
+  def edit
+
+  end
+
+  def update
+    
+  end
 
   private
   def item_params
