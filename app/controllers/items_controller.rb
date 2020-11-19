@@ -32,11 +32,14 @@ before_action :authenticate_user!, only: [:new, :create, :destroy]
   end
 
   def edit
-
+    @item = Item.find(params[:id])
+    unless current_user == @item.user
+      redirect_to root_path
+    end
   end
 
   def update
-    
+
   end
 
   private
