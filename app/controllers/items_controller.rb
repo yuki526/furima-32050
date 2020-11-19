@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-before_action :authenticate_user!, only: [:new, :create]
+before_action :authenticate_user!, only: [:new, :create, :destroy]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -21,6 +21,14 @@ before_action :authenticate_user!, only: [:new, :create]
 
   def show
     @item = Item.find(params[:id])
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    if current_user == item.user
+      item.destroy
+    end
+    redirect_to root_path
   end
 
 
