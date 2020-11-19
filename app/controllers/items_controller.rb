@@ -23,6 +23,11 @@ before_action :authenticate_user!, only: [:new, :create]
     @item = Item.find(params[:id])
   end
 
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+  end
+
 
   private
   def item_params
