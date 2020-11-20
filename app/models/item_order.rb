@@ -3,11 +3,11 @@ class ItemOrder
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :telephone_number
 
   with_options presence: true do
-    :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "Input correctly"}
-    :prefecture_id, numericality: { other_than: 0, message: "Select" }
-    :city
-    :house_number
-    :telephone_number, numericality: { message: "Input only number" }
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "Input correctly"}
+    validates :prefecture_id, numericality: { other_than: 0, message: "Select" }
+    validates :city
+    validates :house_number
+    validates :telephone_number, numericality: { message: "Input only number" }
   end
 
   def save
@@ -16,4 +16,5 @@ class ItemOrder
                     city: city, house_number: house_number, building_name: building_name, 
                     telephone_number: telephone_number, order_id: order.id)
   end
+
 end
