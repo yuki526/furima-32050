@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-before_action :authenticate_user!, only: [:new, :create, :destroy]
+before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :update]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -33,17 +33,22 @@ before_action :authenticate_user!, only: [:new, :create, :destroy]
 
   def edit
     @item = Item.find(params[:id])
+    # 売却済商品は誰も編集ページにアクセスできない
+    if @item.order
+      redirect_to root_path
+    end
+    # 出品者のみ編集ページにアクセス可能
     unless current_user == @item.user
       redirect_to root_path
     end
   end
 
   def update
-    item = Item.find(params[:id])
-    original_image = item.image
-    if item.update(item_params)
-      if item.image.blank?
-        item.image = original_image
+    @item = Item.find(params[:id])
+    original_image = @item.image
+    if @item.update(item_params)
+      if @item.image.blank?
+        @item.image = original_image
       end
       redirect_to item_path(params[:id])
     else
