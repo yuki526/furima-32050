@@ -48,7 +48,7 @@ before_action :set_item, only: [:show, :edit, :update ]
       if @item.image.blank?
         @item.image = original_image
       end
-      redirect_to item_path(params[:id])
+      redirect_to item_path(@item)
     else
       render :edit
     end

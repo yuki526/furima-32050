@@ -5,26 +5,14 @@ app/assets/stylesheets/items/new.css %>
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
   </header>
+
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, local: true do |f| %>
-
-    <%# エラーメッセージの呼び出し %>
-    <%= render 'shared/error_messages', model: f.object %>
-
     <%# 商品情報入力フォームの呼び出し %>
-    <%= render 'input', f: f  %>
-
-    <%# 下部ボタン %>
-    <div class="sell-btn-contents">
-      <%= f.submit "変更する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', "#", class:"back-btn" %>
-    </div>
-    <%# /下部ボタン %>
+    <%= render 'input', item: @item  %>
   </div>
-  <% end %>
 
-  <footer class="items-sell-footer">
+<footer class="items-sell-footer">
     <ul class="menu">
       <li><a href="#">プライバシーポリシー</a></li>
       <li><a href="#">フリマ利用規約</a></li>
