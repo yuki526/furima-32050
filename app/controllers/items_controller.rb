@@ -39,6 +39,17 @@ before_action :authenticate_user!, only: [:new, :create, :destroy]
   end
 
   def update
+    item = Item.find(params[:id])
+    original_image = item.image
+    if item.update(item_params)
+      if item.image.blank?
+        item.image = original_image
+      end
+      redirect_to item_path(params[:id])
+    else
+      render :edit
+    end
+
 
   end
 
