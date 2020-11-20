@@ -35,7 +35,7 @@ before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :updat
     @item = Item.find(params[:id])
     # 売却済商品は誰も編集ページにアクセスできない
     if @item.order
-      redirect_to root_path
+      redirect_to root_path and return
     end
     # 出品者のみ編集ページにアクセス可能
     unless current_user == @item.user
