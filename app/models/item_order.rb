@@ -2,7 +2,13 @@ class ItemOrder
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :telephone_number
 
-  # バリデーション未設定
+  with_options presence: true do
+    :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "Input correctly"}
+    :prefecture_id, numericality: { other_than: 0, message: "Select" }
+    :city
+    :house_number
+    :telephone_number, numericality: { message: "Input only number" }
+  end
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
