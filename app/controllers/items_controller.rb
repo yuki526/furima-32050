@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :update]
+before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :update ]
+before_action :set_item, only: [:show, :edit, :update ]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -20,7 +21,6 @@ before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :updat
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def destroy
@@ -32,7 +32,6 @@ before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :updat
   end
 
   def edit
-    @item = Item.find(params[:id])
     # 売却済商品は誰も編集ページにアクセスできない
     if @item.order
       redirect_to root_path and return
@@ -44,7 +43,6 @@ before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :updat
   end
 
   def update
-    @item = Item.find(params[:id])
     original_image = @item.image
     if @item.update(item_params)
       if @item.image.blank?
@@ -63,6 +61,10 @@ before_action :authenticate_user!, only: [:new, :create, :destroy, :edit, :updat
     params.require(:item).permit(:name, :price, :detail, 
                                 :category_id, :item_status_id, :delivery_fee_id, :prefecture_id, 
                                 :required_day_id, :image).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
   
 end
