@@ -22,14 +22,21 @@ const pay = () => {
       if (status == 200){
         const token = response.id;
       
-    // トークン情報をフォームに埋め込み
+      // トークン情報をフォームに埋め込み
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
         form.insertAdjacentHTML("beforeend", tokenObj);
       }
 
+      // フォームからクレジットカード情報を取り除き、送信
+      document.getElementById("card-number").removeAttribute("name");
+      document.getElementById("card_cvc").removeAttribute("name");
+      document.getElementById("card-exp-month").removeAttribute("name");
+      document.getElementById("card_exp_year").removeAttribute("name");
+
+      form.submit();
+
+
     });
-
-
   });
 };
 
