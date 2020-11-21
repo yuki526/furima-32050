@@ -19,11 +19,12 @@ const pay = () => {
 
     // カード情報をトークン化し、処理が完了したときのみトークン情報を取得
     Payjp.createToken(card, (status, response) => {
-      console.log(status)
-      console.log(response)
       if (status == 200){
-        const token = response.id
-        console.log(token)
+        const token = response.id;
+      
+    // トークン情報をフォームに埋め込み
+        const tokenObj = `<input value=${token} name='token' type="hidden">`;
+        form.insertAdjacentHTML("beforeend", tokenObj);
       }
 
     });
