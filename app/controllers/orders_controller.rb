@@ -1,6 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @item = Item.find(params[:item_id])
+    if current_user == @item.user || @item.order
+      redirect_to root_path and return
+    end
     @item_order = ItemOrder.new
   end
 
@@ -9,7 +14,7 @@ class OrdersController < ApplicationController
     if @item_order.valid?
       item_pay  # PAY.JPの決済処理
       @item_order.save
-      redirect_to root_path
+      redirect_to root_path and return
     else
       @item = Item.find(params[:item_id])
       render :index
