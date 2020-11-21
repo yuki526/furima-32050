@@ -29,12 +29,11 @@ const pay = () => {
 
       // フォームからクレジットカード情報を取り除き、送信
       document.getElementById("card-number").removeAttribute("name");
-      document.getElementById("card_cvc").removeAttribute("name");
+      document.getElementById("card-cvc").removeAttribute("name");
       document.getElementById("card-exp-month").removeAttribute("name");
-      document.getElementById("card_exp_year").removeAttribute("name");
+      document.getElementById("card-exp-year").removeAttribute("name");
 
       form.submit();
-
 
     });
   });
