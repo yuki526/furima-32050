@@ -8,7 +8,7 @@ class ItemOrder
     validates :prefecture_id, numericality: { other_than: 0, message: "Select" }
     validates :city
     validates :house_number
-    validates :telephone_number, numericality: { message: "Input only number" }
+    validates :telephone_number, numericality: { message: "Input only number" }, length: { maximum:11 }
   end
 
   def save
