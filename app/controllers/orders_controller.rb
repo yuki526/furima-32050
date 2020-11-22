@@ -29,10 +29,9 @@ class OrdersController < ApplicationController
   end
 
   def item_pay
-    item = Item.find(@item_order.item)
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: item.price,  # 商品の値段
+      amount: @item.price,  # 商品の値段
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
